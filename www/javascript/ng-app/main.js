@@ -1,0 +1,1 @@
+app = angular.module('sprinklerApp', ['ui.router', 'pascalprecht.translate']);

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html data-ng-app="sprinklerApp" data-ng-controller="appCtrl" lang="en">
+<head>
+    <title>Sprinkler</title>
+    <link rel="stylesheet" media="all" href="stylesheets/toggle-switch.css" />
+    <script src="javascript/vendor/angular.min.js"></script>
+    <script src="javascript/vendor/angular-translate.min.js"></script>
+    <script src="javascript/vendor/angular-ui-router.min.js"></script>
+    <script src="javascript/ng-app/main.js"></script>
+    <script src="javascript/ng-app/controllers/app_ctrl.js"></script>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+</head>
+<body>
+<div>
+    <h1>Sprinkler</h1>
+
+    <ul>
+        <li class="tg-list-item">
+            <input class="tgl tgl-ios" id="valve01" type="checkbox"/>
+            <label class="tgl-btn" for="valve01"></label>
+            <div class="tgl-btn-text">Valve 1</div>
+        </li>
+        <li class="tg-list-item">
+            <input class="tgl tgl-ios" id="valve02" type="checkbox" checked/>
+            <label class="tgl-btn" for="valve02"></label>
+            <div class="tgl-btn-text">Valve 2</div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
