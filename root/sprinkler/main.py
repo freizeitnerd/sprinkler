@@ -6,7 +6,7 @@ CONFIG = json.load(open('config.json'))
 
 valves = []
 valveNames = CONFIG['valveNames']
-gpioNumbers = [0,1,2,3,11,18] # The order asigns valveName to GPIO number
+gpioNumbers = CONFIG['gpioNumbers'] # The order assigns valveName to GPIO number
 
 if len(valveNames) > 6:
   print "Only the first 6 named valves will be supported."
