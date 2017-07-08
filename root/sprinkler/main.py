@@ -1,9 +1,11 @@
 #!/usr/bin/python
 from valve import Valve
-import time
+import time, json
+
+CONFIG = json.load(open('config.json'))
 
 valves = []
-valveNames = ['rear1', 'lawn1', 'lawn2', 'front', 'front2', 'rear2', 'tapWater']
+valveNames = CONFIG['valveNames']
 gpioNumbers = [0,1,2,3,11,18] # The order asigns valveName to GPIO number
 
 if len(valveNames) > 6:
