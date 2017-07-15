@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import onionGpio
+import onionGpio, os
 
 class Valve:
   totalCount = 0
@@ -19,3 +19,4 @@ class Valve:
   def close(self):
     print 'close', self.name
     self.gpio.setOutputDirection(1)
+
