@@ -2,11 +2,11 @@
 gpioNumber="0 1 2 3 11 18 45 46"   # attention redundant with config.json #TODO: Parse config.json
 
 opkg update
-opkg install python-light
+#opkg install python-light, pyOnionGpio
+opkg install arduino-dock-2
+opkg install ruby, ruby-json #,ruby-yaml
+opkg install git, git-http
 opkg install vsftpd
-opkg install pyOnionGpio
-opkg install git
-opkg install git-http
 
 # Set GPIOs
 omega2-ctrl gpiomux set i2c gpio

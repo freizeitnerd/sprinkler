@@ -4,7 +4,7 @@ import time, json
 
 CONFIG = json.load(open('config.json'))
 
-ledTriggerPath = r'/sys/class/leds/omega2p\:amber\:system/trigger'
+ledTriggerPath = r'/sys/class/leds/omega2p:amber:system/trigger'
 print ledTriggerPath
 ## Set the Omega LED trigger to "timer" so that it blinks
 with open(ledTriggerPath, "w") as trigger:
