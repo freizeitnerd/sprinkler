@@ -1,4 +1,5 @@
 require "open3"
+require "yaml/store" # https://robm.me.uk/ruby/2014/01/25/pstore.html
 
 class Valve
   @@mock = false
@@ -8,6 +9,7 @@ class Valve
   @@valves_opened = {}
   @@valves_closed = {}
   @@mock_value = {}
+  @@log = YAML::Store.new("./data/valves_log.yml")
 
   if ENV.has_key?("gpio_mode") && ENV["gpio_mode"] == "mock"
     @@mock = true
@@ -39,6 +41,15 @@ class Valve
   def set(v)
     #puts "Set value for GPIO #{@gpio_number} to #{v} as #{self.inspect}"
 
+    #puts @@log.transaction { @@log.fetch(:nonexistent_key, "default value") }
+
+    unless @@log.transaction { @@log.fetch(@gpio_number, nil) }
+      puts "Init @gpio_number in @@log"
+      @@log.transaction do
+        @@log[@gpio_number] = {last_opened: Time.new(2000,1,1) }
+      end
+    end
+
     if @@mock
       #puts "Mock value for GPIO #{@gpio_number} to #{v}"
       @@mock_value[@gpio_number] = v
@@ -55,6 +66,9 @@ class Valve
       #puts "+ Add GPIO #{@gpio_number} to @@valves_opened as #{self.inspect}"
       @@valves_closed.delete(@gpio_number) if @@valves_closed.has_key?(@gpio_number)
       @@valves_opened[@gpio_number] = self
+      @@log.transaction do
+        @@log[@gpio_number][:last_opened] = Time.now
+      end
     end
     
     if self.value == 1 # closed valve
@@ -156,5 +170,9 @@ class Valve
     @@valves.each do |valve|
       valve.close
     end
+  end
+
+  def log
+    @@log
   end
 end

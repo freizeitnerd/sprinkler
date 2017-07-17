@@ -15,6 +15,8 @@ sprinklers = init_all_sprinklers(CONFIG['gpio_numbers'], SETTINGS['valve_names']
 #   if its time to open it, if frequence is reached (last watering is more than freuqence days ago)
 #   if no time constraint is present
 #   if no other sprinkler is open
+puts sprinklers[0].next_scheduled_run
+puts sprinklers[0].open
 
 
 puts "Nothing more yet"
