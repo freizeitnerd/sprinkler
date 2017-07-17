@@ -3,8 +3,11 @@ gpioNumber="0 2 3 11 18 45 46"   # attention redundant with config.json #TODO: P
 
 opkg update
 opkg install arduino-dock-2
-opkg install ruby, ruby-json
-opkg install git, git-http
+opkg install ruby
+opkg install ruby-yaml
+#opkg install ruby-pstore
+opkg install git
+opkg install git-http
 opkg install vsftpd
 
 # Set GPIOs
@@ -24,4 +27,4 @@ do
   gpioctl dirout $gpioNumber
   gpioctl dirout-high $gpioNumber
 done
-#omega2-ctrl gpiomux get
+omega2-ctrl gpiomux get
