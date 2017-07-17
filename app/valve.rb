@@ -1,82 +1,150 @@
-#!/usr/bin/ruby
 require "open3"
 
 class Valve
+  @@mock = false
   @@gpios = []
   @@valves = []
   @@valves_all = {}
   @@valves_opened = {}
   @@valves_closed = {}
+  @@mock_value = {}
 
-  def initialize(name, gpio_number)
-    puts "Init valve '#{name}' at GPIO#{gpio_number}"
-    @gpio_number = gpio_number
-    @name = name
-
-    stdin, stdout, stderr = Open3.popen3("fast-gpio set-output #{gpio_number}")
-    if stderr.gets
-      raise(OnionGpioWrapperError, stderr.gets)
-    end
-
-    self.close
-
-    @@gpios.push(gpio_number)
-    @@valves.push(self)
-    @@valves_all[@gpio_number] = self
-    @@valves_closed[@gpio_number] = self
+  if ENV.has_key?("gpio_mode") && ENV["gpio_mode"] == "mock"
+    @@mock = true
   end
 
 
-  def set(value)
-    stdin, stdout, stderr = Open3.popen3("fast-gpio set #{@gpio_number} #{value}")
-    if stderr.gets
-      raise(OnionGpioWrapperError, stderr.gets)
+  def initialize(name, gpio_number)
+    @gpio_number = gpio_number
+    @name = name
+
+    if @@mock
+      puts "Init valve '#{@name}' at Fake-GPIO#{@gpio_number} and mock all interactions as valid"
+    else
+      #puts "Init valve '#{@name}' at GPIO#{@gpio_number}"
+      stdin, stdout, stderr = Open3.popen3("fast-gpio set-output #{@gpio_number}")
+      if stderr.gets
+        raise(OnionGpioWrapperError, stderr.gets)
+      end
     end
-    
-    if self.vaule == 0
+
+    @@gpios.push(@gpio_number)
+    @@valves.push(self)
+    @@valves_all[@gpio_number] = self
+
+    self.close
+  end
+
+
+  def set(v)
+    #puts "Set value for GPIO #{@gpio_number} to #{v} as #{self.inspect}"
+
+    if @@mock
+      #puts "Mock value for GPIO #{@gpio_number} to #{v}"
+      @@mock_value[@gpio_number] = v
+    else
+      stdin, stdout, stderr = Open3.popen3("fast-gpio set #{@gpio_number} #{v}")
+      if stderr.gets
+        raise(OnionGpioWrapperError, stderr.gets)
+      end
+    end
+
+    #puts "self.value for GPIO #{@gpio_number} is #{self.value}"
+
+    if self.value == 0 # opened valve
+      #puts "+ Add GPIO #{@gpio_number} to @@valves_opened as #{self.inspect}"
       @@valves_closed.delete(@gpio_number) if @@valves_closed.has_key?(@gpio_number)
       @@valves_opened[@gpio_number] = self
     end
     
-    if self.vaule == 1
+    if self.value == 1 # closed valve
+      #puts "- Add GPIO #{@gpio_number} to @@valves_closed as #{self.inspect}"
       @@valves_opened.delete(@gpio_number) if @@valves_opened.has_key?(@gpio_number)
       @@valves_closed[@gpio_number] = self
+      #puts "@@valves_closed #{@@valves_closed.inspect}"
     end
     
-    value == self.value # return true/false
+    v == value # return true/false
   end
 
+
   def get
-    stdin, stdout, stderr = Open3.popen3("fast-gpio read #{@gpio_number}")
-    if stderr.gets
-      raise(OnionGpioWrapperError, stderr.gets)
+    status = ""
+    if @@mock
+      status = "mocked #{@@mock_value[@gpio_number]}"
+    else
+      stdin, stdout, stderr = Open3.popen3("fast-gpio read #{@gpio_number}")
+      if stderr.gets
+        raise(OnionGpioWrapperError, stderr.gets)
+      end
+      status = stdout.gets.to_s
     end
-    status = stdout.gets.to_s
-    status.split.last
+    status.split.last.to_i
   end
+
 
   def open
     set(0)
   end
 
+
   def close
     set(1)
   end
+
 
   def is_closed?
     0 == self.get
   end
 
+
   def is_opened?
     1 == self.get
   end
 
+
   def value(value=nil)
     if value.nil?
-      get()
+      get
     else
       set(value)
     end
   end
 
+
+  def valves
+    @@valves
+  end
+
+
+  def valves_all
+    @@valves_all
+  end
+
+
+  def valves_opened
+    @@valves_opened
+  end
+
+
+  def valves_open # alias
+    valves_opened
+  end
+
+
+  def valves_closed
+    @@valves_closed
+  end
+
+
+  def valves_close # alias
+    valves_closed
+  end
+
+
+  def close_all
+    @@valves.each do |valve|
+      valve.close
+    end
+  end
 end

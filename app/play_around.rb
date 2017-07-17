@@ -1,17 +1,26 @@
-#!/usr/bin/ruby
-require "valve.rb"
+ENV["gpio_mode"] = "mock"
+require "./valve"
 
 lawn1 = Valve.new("lawn1", 0)
+lawn2 = Valve.new("lawn2", 2)
+rear = Valve.new("rear", 3)
+
 lawn1.open
 puts "Lawn1 is set to #{lawn1.get}"
-sleep(1)
-lawn2 = Valve.new("lawn2", 2)
+sleep(0.3)
 lawn2.open
-sleep(1)
+sleep(0.3)
 lawn1.close
-sleep(1)
+sleep(0.3)
 lawn2.close
-sleep(1)
-rear = Valve.new("rear", 3)
+sleep(0.3)
 puts "Rear is set to #{rear.get}"
-puts "#{rear.count_total} valves attached"
+puts "#{rear.valves.size} valves attached"
+lawn1.open
+lawn2.open
+
+puts "#{rear.valves_opened.size} valves opened"
+puts "#{rear.valves_closed.size} valves closed"
+rear.close_all
+puts "#{rear.valves_opened.size} valves opened"
+puts "#{rear.valves_closed.size} valves closed"

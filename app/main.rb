@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
-require "valve.rb"
+require "./valve"
 
 puts "Noting yet"
