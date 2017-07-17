@@ -1,6 +1,6 @@
-require 'json'
-CONFIG = JSON.parse(File.read('../config/config.json'))
-SETTINGS = JSON.parse(File.read('../config/settings.json'))
+require './settings'
+CONFIG = get_config
+SETTINGS = get_settings
 ENV["gpio_mode"] = CONFIG["gpio_mode"]
 require "./valve"
 
