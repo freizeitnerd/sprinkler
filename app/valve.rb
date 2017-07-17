@@ -14,7 +14,7 @@ class Valve
   end
 
 
-  def initialize(name, gpio_number)
+  def initialize(gpio_number, name)
     @gpio_number = gpio_number
     @name = name
 
@@ -139,6 +139,16 @@ class Valve
 
   def valves_close # alias
     valves_closed
+  end
+
+
+  def name
+    @name
+  end
+
+
+  def gpio_number
+    @gpio_number
   end
 
 

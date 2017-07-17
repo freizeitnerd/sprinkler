@@ -1,10 +1,9 @@
 #!/bin/bash
-gpioNumber="0 1 2 3 11 18 45 46"   # attention redundant with config.json #TODO: Parse config.json
+gpioNumber="0 2 3 11 18 45 46"   # attention redundant with config.json #TODO: Parse config.json
 
 opkg update
-#opkg install python-light, pyOnionGpio
 opkg install arduino-dock-2
-opkg install ruby, ruby-json #,ruby-yaml
+opkg install ruby, ruby-json
 opkg install git, git-http
 opkg install vsftpd
 
@@ -25,4 +24,4 @@ do
   gpioctl dirout $gpioNumber
   gpioctl dirout-high $gpioNumber
 done
-omega2-ctrl gpiomux get
+#omega2-ctrl gpiomux get

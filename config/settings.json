@@ -1,3 +1,18 @@
 {
-  "valve_names": ["rear1", "lawn1", "lawn2", "front", "front2", "rear2"]
+  "valve_names": ["Rear 1", "Lawn 1", "Lawn 2", "Front1 ", "Front 2", "Rear 2"],
+  "tap_name": "Faucet",
+  "timeframe": null,
+  "timeframe_string": "night", // sunset, morning, evening
+  "program": {
+    "0": {
+      "frequence": 1,
+      "duration": 20,
+      "timeframe_string": "night",
+      "timeframe": [{"begin": "22:00", "end": "6:00"}]
+    },
+    "2": {
+      "frequence": 4,
+      "duration": 60
+    }
+  }
 }

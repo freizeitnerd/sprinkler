@@ -1,4 +1,7 @@
-ENV["gpio_mode"] = "mock"
+require './settings'
+CONFIG = get_config
+SETTINGS = get_settings
+ENV["gpio_mode"] = CONFIG["gpio_mode"]
 require "./valve"
 
 lawn1 = Valve.new("lawn1", 0)
