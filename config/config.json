@@ -1,0 +1,5 @@
+{
+  "gpio_mode": "mock",
+  "gpio_numbers": [0,2,3,11,18,45],
+  "tap_gpio": 46
+}

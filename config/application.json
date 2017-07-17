@@ -1,5 +1,0 @@
-{
-  "foo": "bar",
-  "valveNames": ["rear1", "lawn1", "lawn2", "front", "front2", "rear2", "tapWater"],
-  "gpioNumbers": [0,2,3,11,18,45,46]
-}
