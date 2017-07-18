@@ -1,8 +1,8 @@
-require './settings'
+require_relative "lib/settings"
 CONFIG = get_config
 SETTINGS = get_settings
 ENV["gpio_mode"] = CONFIG["gpio_mode"]
-require "./valve"
+require_relative "lib/valve"
 
 lawn1 = Valve.new("lawn1", 0)
 lawn2 = Valve.new("lawn2", 2)
