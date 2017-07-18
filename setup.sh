@@ -10,6 +10,18 @@ opkg install git
 opkg install git-http
 opkg install vsftpd
 
+# copy example configuration, if no configuration exists
+if [! -e config/config.json ]
+then
+    echo "Init default configuration"
+    cp config/example/config.json /config
+fi
+if [! -e config/settings.json ]
+then
+    echo "Init default setting"
+    cp config/example/settings.json /config
+fi
+
 # Set GPIOs
 omega2-ctrl gpiomux set i2c gpio
 omega2-ctrl gpiomux set uart0 gpio

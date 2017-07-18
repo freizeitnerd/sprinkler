@@ -1,6 +1,8 @@
 .idea
 doc/
 app/data/valves_log.yml
+config/settings.json
+config/config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
