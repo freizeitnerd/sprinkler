@@ -1,10 +1,12 @@
+#!/usr/bin/ruby
+
 require_relative "lib/settings"
 CONFIG = get_config
 SETTINGS = get_settings
 ENV["gpio_mode"] = CONFIG["gpio_mode"]
-require_relative "lib/valve"
-require_relative "lib/sprinkler"
-require_relative "lib/tap"
+require_relative "lib/valve_class"
+require_relative "lib/sprinkler_class"
+require_relative "lib/tap_class"
 require_relative "lib/init_all_sprinklers"
 require_relative "lib/init_tap"
 

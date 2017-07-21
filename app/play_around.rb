@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require_relative "lib/settings"
 CONFIG = get_config
 SETTINGS = get_settings
