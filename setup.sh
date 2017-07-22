@@ -3,29 +3,30 @@ gpioNumber="0 2 3 11 18 45 46"   # attention redundant with config.json #TODO: P
 
 opkg update
 opkg install ca-certificates
-opkg install openssl-util
+#opkg install openssl-util
+#opkg install ruby-openssl
 opkg install arduino-dock-2
 opkg install ruby
-opkg install ruby-gems
+#opkg install ruby-gems
 opkg install ruby-yaml
 opkg install ruby-cgi
-opkg install ruby-enc-extra
+#opkg install ruby-enc-extra
 opkg install ruby-datetime
-#opkg install ruby-json
+opkg install ruby-json
 opkg install ruby-pstore
 opkg install git
 opkg install git-http
 opkg install vsftpd
 
-gem install activesupport
+#gem install activesupport
 
 # copy example configuration, if no configuration exists
-if [! -e config/config.json ]
+if [ ! -e config/config.json ]
 then
     echo "Init default configuration"
     cp config/example/config.json /config
 fi
-if [! -e config/settings.json ]
+if [ ! -e config/settings.json ]
 then
     echo "Init default setting"
     cp config/example/settings.json /config
