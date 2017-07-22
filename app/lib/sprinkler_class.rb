@@ -1,4 +1,4 @@
-require 'active_support/time'
+#require 'active_support/time'
 require_relative "settings"
 require_relative "valve_class"
 
@@ -6,12 +6,11 @@ class Sprinkler < Valve
   @@settings = get_settings
 
   def next_scheduled_watering
-    #@@settings[self.gpio_number].
-    start_at = 2.minute.ago
-    end_at = 2.minute.ago
+    start_at = Time.now
+    end_at = Time.now
     {
         start_at: start_at,
-        end_at: end_at,
+        end_at: end_at
     }
   end
 
@@ -23,11 +22,12 @@ class Sprinkler < Valve
 
 
   def has_sprinkel_time_now?
-    if next_optimized_watering.start_at >= @@settings[self.gpio_number].start_at && next_optimized_watering.end_at <= @@settings[self.gpio_number].end_at
-      true
-    else
-      false
-    end
+    true
+    #if next_optimized_watering[:start_at] >= @@settings[self.gpio_number].start_at && next_optimized_watering.end_at <= @@settings[self.gpio_number].end_at
+    #  true
+    #else
+    #  false
+    #end
   end
 
 
