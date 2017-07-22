@@ -4,7 +4,7 @@ require_relative 'lib/settings'
 CONFIG = get_config
 SETTINGS = get_settings
 ENV["gpio_mode"] = CONFIG["gpio_mode"]
-require_relative "lib/valve"
+require_relative "lib/valve_class"
 
 puts 'Initialize Sprinkler-Bot'
 

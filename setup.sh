@@ -5,7 +5,10 @@ opkg update
 opkg install arduino-dock-2
 opkg install ruby
 opkg install ruby-yaml
-#opkg install ruby-pstore
+opkg install ruby-cgi
+opkg install ruby-datetime
+#opkg install ruby-json
+opkg install ruby-pstore
 opkg install git
 opkg install git-http
 opkg install vsftpd

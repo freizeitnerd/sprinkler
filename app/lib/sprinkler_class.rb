@@ -1,3 +1,4 @@
+require 'active_support/time'
 require_relative "settings"
 require_relative "valve_class"
 
@@ -5,7 +6,9 @@ class Sprinkler < Valve
   @@settings = get_settings
 
   def next_scheduled_watering
-    @@settings[self.gpio_number].
+    #@@settings[self.gpio_number].
+    start_at = 2.minute.ago
+    end_at = 2.minute.ago
     {
         start_at: start_at,
         end_at: end_at,
