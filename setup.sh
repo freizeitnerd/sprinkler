@@ -24,12 +24,12 @@ opkg install vsftpd
 if [ ! -e config/config.json ]
 then
     echo "Init default configuration"
-    cp config/example/config.json /config
+    cp config/example/config.json config/config.json
 fi
 if [ ! -e config/settings.json ]
 then
     echo "Init default setting"
-    cp config/example/settings.json /config
+    cp config/example/settings.json config/settings.json
 fi
 
 # Set GPIOs
