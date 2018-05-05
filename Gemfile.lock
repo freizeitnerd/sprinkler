@@ -1,10 +1,14 @@
 GEM
+  remote: https://rubygems.org/
   specs:
+    omega2_gpio (0.1.06)
 
 PLATFORMS
+  x64-mingw32
   x86-mingw32
 
 DEPENDENCIES
+  omega2_gpio
 
 BUNDLED WITH
    1.16.1
