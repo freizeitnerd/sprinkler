@@ -3,7 +3,8 @@ gpioNumber="0 2 3 11 18 45 46"   # attention redundant with config.json #TODO: P
 
 opkg update
 
-opkg install ca-certificates
+opkg install git git-http ca-bundle
+
 opkg install ruby-openssl
 opkg install arduino-dock-2
 opkg install ruby
@@ -14,10 +15,7 @@ opkg install ruby-enc-extra
 opkg install ruby-datetime
 opkg install ruby-json
 opkg install ruby-pstore
-opkg install git
-opkg install git-http
 opkg install vsftpd
-#opkg install openssl-util
 
 gem install bundler
 bundle install
