@@ -19,6 +19,8 @@ def get_config
 
   config
 end
+
+
 def get_settings
   path = [__dir__, "../../config/settings.json"].join("/")
   JSON.parse(File.read(path))

@@ -1,7 +1,7 @@
 doc/
 app/data/valves_log.yml
 config/settings.json
-config/config.json
+config/config*.json
 
 
 # Ruby Mine
