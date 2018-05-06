@@ -15,10 +15,9 @@ opkg install ruby-enc-extra
 opkg install ruby-datetime
 opkg install ruby-json
 opkg install ruby-pstore
-opkg install vsftpd
 
-gem install bundler
-bundle install
+gem install logger
+gem install omega2_gpio --pre
 
 # copy example configuration, if no configuration exists
 if [ ! -e config/config.json ]

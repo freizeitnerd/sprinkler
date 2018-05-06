@@ -5,7 +5,7 @@ require_relative "lib/settings"
 require_relative "lib/init_logger"
 CONFIG = get_config
 
-logger = init_logger(STDOUT)
+logger = init_logger
 
 sprinklers = []
 

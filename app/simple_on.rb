@@ -15,9 +15,11 @@ name = "lawn"
 
 valve = Omega2Gpio::Output.new(gpio_number).high
 
+puts "Open #{name} valve for #{duration_in_minutes} minutes"
 logger.info "Open #{name} valve for #{duration_in_minutes} minutes"
 valve.low # open valve
 sleep(duration_in_minutes*60) # keep valve open for duration_in_minutes
 
+puts "Close #{name} valve"
 logger.info "Close #{name} valve"
 valve.high # close valve
