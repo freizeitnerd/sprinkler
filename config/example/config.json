@@ -1,7 +1,36 @@
 {
   "mock": true,
-  "messaging_level": 2,
+  "messaging_level": 0,
   "gpio_mode": "production",
-  "gpio_numbers": [0,2,3,11,18,45],
-  "tap_gpio": 46
+  "gpio_numbers": [0,2,3,11],
+  "tap_gpio": 46,
+  "sprinklers": [
+    {
+      "name": "lawn",
+      "gpio": 0,
+      "description": "center sprinkler at lawn in back yard",
+      "schedules": [
+        {
+          "trigger_in_cron_style": "00 20 * * 1,3,5", // https://crontab.guru/#00_20_*_*_1,3,5
+          "duration_in_minutes": 30
+        }
+      ]
+    },
+    {
+      "name": "bushes",
+      "description": "hose sprinkler at beds in back yard",
+      "gpio": 3,
+      "schedules": [
+        {
+          "trigger_in_cron_style": "30 05 * * *",
+          "duration_in_minutes": 47
+        }
+      ]
+    },
+    {
+      "name": "front",
+      "description": "sprinklers in front yard",
+      "gpio": 11
+    }
+  ]
 }

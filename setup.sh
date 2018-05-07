@@ -17,6 +17,7 @@ opkg install ruby-json
 opkg install ruby-pstore
 
 gem install logger
+gem install parse-cron
 gem install omega2_gpio --pre
 
 # copy example configuration, if no configuration exists

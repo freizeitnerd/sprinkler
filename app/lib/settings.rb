@@ -14,6 +14,7 @@ def get_config
 
   config = JSON.parse(File.read(path))
 
+  #TODO: Think twice if the followin gbelongs here. 'get_config' should 'get' data not do/set anything
   Omega2Gpio.configuration.mock = config["mock"]
   Omega2Gpio.configuration.messaging_level = config["messaging_level"]
 
