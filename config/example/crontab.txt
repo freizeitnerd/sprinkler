@@ -1,2 +1,6 @@
+#
 @reboot /root/sprinkler/app/boot.rb >> /root/sprinkler/cron.log
 * * * * * /root/sprinkler/app/scheduler.rb >> /root/sprinkler/cron.log
+#
+# dont forget to restart cron to make changes effective
+# /etc/init.d/cron restart
