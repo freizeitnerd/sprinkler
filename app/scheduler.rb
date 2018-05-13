@@ -24,6 +24,7 @@ CONFIG["sprinklers"].each do |sprinkler|
   unless sprinkler["schedules"].nil?
     sprinkler["schedules"].each do |schedule|
       puts "it is #{Time.now}"
+      logger.info "Cron triggered"
       cron_parser = CronParser.new( schedule['trigger_in_cron_style'] )
       last_start = cron_parser.last(Time.now)
       next_start = cron_parser.next(Time.now)

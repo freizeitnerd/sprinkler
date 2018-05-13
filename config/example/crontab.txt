@@ -1,0 +1,2 @@
+@reboot /root/sprinkler/app/boot.rb >> /root/sprinkler/cron.log
+* * * * * /root/sprinkler/app/scheduler.rb >> /root/sprinkler/cron.log
