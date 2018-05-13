@@ -21,8 +21,9 @@ end
 
 CONFIG["sprinklers"].each do |sprinkler|
   puts sprinkler["name"]
-  if !sprinkler["schedules"].nil?
+  unless sprinkler["schedules"].nil?
     sprinkler["schedules"].each do |schedule|
+      puts "it is #{Time.now}"
       cron_parser = CronParser.new( schedule['trigger_in_cron_style'] )
       last_start = cron_parser.last(Time.now)
       next_start = cron_parser.next(Time.now)
@@ -36,11 +37,15 @@ CONFIG["sprinklers"].each do |sprinkler|
 
       if is_active and sprinkler[sprinkler["name"].to_s].high? then
         # valve is closed but should be open --> start sprinkler
-        puts "Open sprinkler #{sprinkler['name']}"
+        msg = "Open sprinkler #{sprinkler['name']} for #{schedule['duration_in_minutes']}"
+        logger.info msg
+        puts msg
         sprinkler[sprinkler["name"].to_s].low
       elsif !is_active and sprinkler[sprinkler["name"].to_s].low? then
         # valve is open but should be closed --> stop sprinkler
-        puts "Close sprinkler #{sprinkler['name']}"
+        msg = "Close sprinkler #{sprinkler['name']}"
+        logger.info msg
+        puts msg
         sprinkler[sprinkler["name"].to_s].high
       else
         puts "Error: Close #{sprinkler['name']}"

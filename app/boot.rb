@@ -1,14 +1,18 @@
 #!/usr/bin/ruby
 
-require_relative 'lib/settings'
+require_relative "lib/init_logger"
+require_relative "lib/settings"
+
 CONFIG = get_config
-SETTINGS = get_settings
-ENV["gpio_mode"] = CONFIG["gpio_mode"]
-require_relative "lib/valve_class"
 
-puts 'Initialize Sprinkler-Bot'
+logger = init_logger
 
-# Close all Valves, by init them
-tap = init_tap(CONFIG['tap_gpio'], SETTINGS['tap_name'])
-sprinklers = init_all_sprinklers(CONFIG['gpio_numbers'], SETTINGS['valve_names'])
+sprinklers = {}
+
+CONFIG["sprinklers"].each do |sprinkler|
+  sprinkler[sprinkler["name"].to_s] = Omega2Gpio::Output.new(sprinkler["gpio"])
+  msg = "Close sprinkler #{sprinkler['name']} at GPIO #{sprinkler['gpio']}"
+  logger.info msg
+  puts msg
+end
 

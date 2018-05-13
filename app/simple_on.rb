@@ -8,7 +8,7 @@ CONFIG = get_config
 logger = init_logger
 
 
-gpio_number = 0 # lawn
+gpio_number = 3 # lawn
 duration_in_minutes = 1 # minutes
 name = "lawn"
 
