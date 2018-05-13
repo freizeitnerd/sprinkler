@@ -4,3 +4,6 @@
 #
 # dont forget to restart cron to make changes effective
 # /etc/init.d/cron restart
+# read more: https://onion.io/2bt-running-commands-on-a-schedule/
+#
+# run a command at boot, read https://docs.onion.io/omega2-docs/running-a-command-on-boot.html
