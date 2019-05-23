@@ -48,8 +48,16 @@ CONFIG["sprinklers"].each do |sprinkler|
         logger.info msg
         puts msg
         sprinkler[sprinkler["name"].to_s].high
+      elsif is_active and sprinkler[sprinkler["name"].to_s].high? then
+        # valve is open and shall be open --> do nothing, continue watering
+        msg = "Continue sprinkler #{sprinkler['name']}"
+        # logger.info msg
+        puts msg
+        sprinkler[sprinkler["name"].to_s].high
       else
-        puts "Error: Close #{sprinkler['name']}"
+        msg = "WARNING: Unexpected sprinkler status. Close #{sprinkler['name']}"
+        logger.info msg
+        puts msg
         Omega2Gpio::Output.new(sprinkler["gpio"]).high
       end
     end
